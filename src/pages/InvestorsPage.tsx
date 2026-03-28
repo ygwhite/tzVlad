@@ -7,6 +7,7 @@ import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { LeadForm } from '../components/forms/LeadForm'
 import { investors } from '../lib/content'
+import { siteMedia, siteMediaAlt } from '../lib/siteMedia'
 
 export const InvestorsPage = () => {
   const navigate = useNavigate()
@@ -55,8 +56,25 @@ export const InvestorsPage = () => {
               </AnimatedReveal>
             </div>
 
-            <div className="col-5">
-              <AnimatedReveal delayMs={180}>
+            <div className="col-5 heroMediaStack">
+              <AnimatedReveal delayMs={80}>
+                <figure className="heroPhotoFrame heroPhotoFrame--tall">
+                  <img
+                    className="heroPhotoFrame__img"
+                    src={siteMedia.investorsInfrastructure}
+                    alt={siteMediaAlt.investorsInfrastructure}
+                    width={1080}
+                    height={1350}
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <figcaption className="heroPhotoFrame__cap">
+                    Масштабируемая инфраструктура и прозрачные метрики роста
+                  </figcaption>
+                </figure>
+              </AnimatedReveal>
+
+              <AnimatedReveal delayMs={160}>
                 <div className="card card--brand" style={{ padding: 24, boxShadow: 'none' }}>
                   <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--brand)' }}>
                     Ключевой фокус
@@ -251,4 +269,3 @@ export const InvestorsPage = () => {
     </div>
   )
 }
-

@@ -8,6 +8,7 @@ import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { LeadForm } from '../components/forms/LeadForm'
 import { company, docs, timeline, values } from '../lib/content'
+import { siteMedia, siteMediaAlt } from '../lib/siteMedia'
 
 export const HomePage = () => {
   const navigate = useNavigate()
@@ -27,8 +28,8 @@ export const HomePage = () => {
     <div style={{ paddingBottom: 48 }}>
       <section className="section section--hero">
         <Container>
-          <div className="grid--12">
-            <div className="col-7">
+          <div className="heroHomeGrid">
+            <div className="heroHomeGrid__intro">
               <AnimatedReveal>
                 <div className="heroKicker" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
                   <div
@@ -87,8 +88,27 @@ export const HomePage = () => {
               </AnimatedReveal>
             </div>
 
-            <div className="col-5">
-              <AnimatedReveal delayMs={120}>
+            <div className="heroHomeGrid__media">
+              <AnimatedReveal delayMs={80} className="heroHomeGrid__mediaReveal">
+                <figure className="heroPhotoFrame heroPhotoFrame--heroSpan">
+                  <img
+                    className="heroPhotoFrame__img"
+                    src={siteMedia.heroButcher}
+                    alt={siteMediaAlt.heroButcher}
+                    width={960}
+                    height={1350}
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <figcaption className="heroPhotoFrame__cap">
+                    Ручной контроль партий и документирование на линии обвалки
+                  </figcaption>
+                </figure>
+              </AnimatedReveal>
+            </div>
+
+            <div className="heroHomeGrid__growth">
+              <AnimatedReveal delayMs={90}>
                 <div className="card" style={{ padding: 24 }}>
                   <div style={{ fontSize: 14, fontWeight: 700, color: 'rgba(11,27,20,.7)' }}>
                     Ключевые этапы роста
@@ -144,6 +164,107 @@ export const HomePage = () => {
                 </div>
               </AnimatedReveal>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="section">
+        <Container>
+          <div className="grid--12">
+            <div className="col-5">
+              <AnimatedReveal>
+                <SectionTitle title="О компании" subtitle="Миссия и ориентиры" />
+              </AnimatedReveal>
+
+              <AnimatedReveal delayMs={90}>
+                <div className="card" style={{ padding: 22 }}>
+                  <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: 'rgba(11,27,20,.8)' }}>
+                    {company.mission}
+                  </p>
+                </div>
+              </AnimatedReveal>
+            </div>
+
+            <div className="col-7">
+              <AnimatedReveal delayMs={140}>
+                <div className="grid grid--2" style={{ gap: 14 }}>
+                  {values.map((v, idx) => (
+                    <AnimatedReveal key={v.title} delayMs={idx * 60}>
+                      <div className="card" style={{ padding: 20, transition: 'transform 150ms ease' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14 }}>
+                          <div style={{ fontSize: 16, fontWeight: 900 }}>{v.title}</div>
+                          <div style={{ height: 40, width: 40, borderRadius: 16, background: 'rgba(4,82,58,.1)' }} />
+                        </div>
+                        <p style={{ margin: '10px 0 0', fontSize: 14, lineHeight: 1.7, color: 'rgba(11,27,20,.75)' }}>
+                          {v.description}
+                        </p>
+                        <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                          {v.points.map((p) => (
+                            <div key={p} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 14, color: 'rgba(11,27,20,.7)' }}>
+                              <span style={{ marginTop: 8, height: 6, width: 6, borderRadius: 9999, background: 'var(--accent)' }} aria-hidden="true" />
+                              <span>{p}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </AnimatedReveal>
+                  ))}
+                </div>
+              </AnimatedReveal>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="section">
+        <Container>
+          <AnimatedReveal>
+            <SectionTitle
+              title="Инфраструктура и контроль качества"
+              subtitle="От фермы и логистики — до технологического цикла на площадке клиента."
+            />
+          </AnimatedReveal>
+
+          <div className="mediaMosaic">
+            {[
+              {
+                media: siteMedia.dairyHerd,
+                alt: siteMediaAlt.dairyHerd,
+                title: 'Сырье с проверенных ферм',
+                text: 'Базируемся на стадах с устойчивым качеством молочного и мясного направления.',
+                className: 'mediaMosaic__figure--tall'
+              },
+              {
+                media: siteMedia.supplyNetwork,
+                alt: siteMediaAlt.supplyNetwork,
+                title: 'Логистическая сеть',
+                text: 'Температурная цепь и мониторинг партий по всей траектории.'
+              },
+              {
+                media: siteMedia.agriculturalLandscape,
+                alt: siteMediaAlt.agriculturalLandscape,
+                title: 'Масштабируемые площади',
+                text: 'Запас мощности по полям и переработке для наращивания объемов.'
+              }
+            ].map((item) => (
+              <AnimatedReveal key={item.title} delayMs={90}>
+                <figure className={['mediaMosaic__figure', item.className].filter(Boolean).join(' ')}>
+                  <img
+                    className="mediaMosaic__img"
+                    src={item.media}
+                    alt={item.alt}
+                    width={1600}
+                    height={1200}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption className="mediaMosaic__cap">
+                    <div className="mediaMosaic__title">{item.title}</div>
+                    <div className="mediaMosaic__text">{item.text}</div>
+                  </figcaption>
+                </figure>
+              </AnimatedReveal>
+            ))}
           </div>
         </Container>
       </section>
@@ -213,54 +334,6 @@ export const HomePage = () => {
                 </div>
               </AnimatedReveal>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="section">
-        <Container>
-          <div className="grid--12">
-            <div className="col-5">
-              <AnimatedReveal>
-                <SectionTitle title="О компании" subtitle="Миссия и ориентиры" />
-              </AnimatedReveal>
-
-              <AnimatedReveal delayMs={90}>
-                <div className="card" style={{ padding: 22 }}>
-                  <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: 'rgba(11,27,20,.8)' }}>
-                    {company.mission}
-                  </p>
-                </div>
-              </AnimatedReveal>
-            </div>
-
-            <div className="col-7">
-              <AnimatedReveal delayMs={140}>
-                <div className="grid grid--2" style={{ gap: 14 }}>
-                  {values.map((v, idx) => (
-                    <AnimatedReveal key={v.title} delayMs={idx * 60}>
-                      <div className="card" style={{ padding: 20, transition: 'transform 150ms ease' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14 }}>
-                          <div style={{ fontSize: 16, fontWeight: 900 }}>{v.title}</div>
-                          <div style={{ height: 40, width: 40, borderRadius: 16, background: 'rgba(4,82,58,.1)' }} />
-                        </div>
-                        <p style={{ margin: '10px 0 0', fontSize: 14, lineHeight: 1.7, color: 'rgba(11,27,20,.75)' }}>
-                          {v.description}
-                        </p>
-                        <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                          {v.points.map((p) => (
-                            <div key={p} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 14, color: 'rgba(11,27,20,.7)' }}>
-                              <span style={{ marginTop: 8, height: 6, width: 6, borderRadius: 9999, background: 'var(--accent)' }} aria-hidden="true" />
-                              <span>{p}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </AnimatedReveal>
-                  ))}
-                </div>
-              </AnimatedReveal>
-            </div>
           </div>
         </Container>
       </section>
@@ -367,4 +440,3 @@ export const HomePage = () => {
     </div>
   )
 }
-

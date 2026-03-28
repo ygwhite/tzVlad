@@ -6,6 +6,7 @@ import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { LeadForm } from '../components/forms/LeadForm'
 import { geography, partnersCategories } from '../lib/content'
+import { siteMedia, siteMediaAlt } from '../lib/siteMedia'
 
 export const PartnersPage = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -24,38 +25,90 @@ export const PartnersPage = () => {
     <div style={{ paddingBottom: 48 }}>
       <section className="section section--hero">
         <Container>
-          <AnimatedReveal>
-            <SectionTitle
-              title="Партнёрам, география и контакты"
-              subtitle="Поставки мясосырья для долгосрочных B2B-партнерств"
-            />
-          </AnimatedReveal>
-
-          <div style={{ marginTop: 24 }} className="grid grid--3">
-            {[
-              {
-                title: 'Долгосрочные контракты',
-                text: '12–36 месяцев и индивидуальные условия под технологические требования.'
-              },
-              {
-                title: 'Прозрачный документооборот',
-                text: 'Запрос копий документов и сертификатов — в удобном формате.'
-              },
-              {
-                title: 'Контроль качества',
-                text: 'Стандарты хранения и безопасность цепочки поставок.'
-              }
-            ].map((b, idx) => (
-              <AnimatedReveal key={b.title} delayMs={idx * 90}>
-                <div className="card" style={{ padding: 20, boxShadow: 'none' }}>
-                  <div style={{ fontSize: 16, fontWeight: 900 }}>{b.title}</div>
-                  <div style={{ marginTop: 10, fontSize: 14, lineHeight: 1.7, color: 'rgba(11,27,20,.75)' }}>
-                    {b.text}
-                  </div>
-                </div>
+          <div className="grid--12">
+            <div className="col-7">
+              <AnimatedReveal>
+                <SectionTitle
+                  title="Партнёрам, география и контакты"
+                  subtitle="Поставки мясосырья для долгосрочных B2B-партнерств"
+                />
               </AnimatedReveal>
-            ))}
+
+              <div style={{ marginTop: 24 }} className="grid grid--3">
+                {[
+                  {
+                    title: 'Долгосрочные контракты',
+                    text: '12–36 месяцев и индивидуальные условия под технологические требования.'
+                  },
+                  {
+                    title: 'Прозрачный документооборот',
+                    text: 'Запрос копий документов и сертификатов — в удобном формате.'
+                  },
+                  {
+                    title: 'Контроль качества',
+                    text: 'Стандарты хранения и безопасность цепочки поставок.'
+                  }
+                ].map((b, idx) => (
+                  <AnimatedReveal key={b.title} delayMs={idx * 90}>
+                    <div className="card" style={{ padding: 20, boxShadow: 'none' }}>
+                      <div style={{ fontSize: 16, fontWeight: 900 }}>{b.title}</div>
+                      <div style={{ marginTop: 10, fontSize: 14, lineHeight: 1.7, color: 'rgba(11,27,20,.75)' }}>
+                        {b.text}
+                      </div>
+                    </div>
+                  </AnimatedReveal>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-5 heroMediaStack">
+              <AnimatedReveal delayMs={120}>
+                <figure className="heroPhotoFrame heroPhotoFrame--tall">
+                  <img
+                    className="heroPhotoFrame__img"
+                    src={siteMedia.partnersLogistics}
+                    alt={siteMediaAlt.partnersLogistics}
+                    width={1080}
+                    height={1350}
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <figcaption className="heroPhotoFrame__cap">
+                    Логистический комплекс и склад класса «А»
+                  </figcaption>
+                </figure>
+              </AnimatedReveal>
+            </div>
           </div>
+        </Container>
+      </section>
+
+      <section className="section">
+        <Container>
+          <AnimatedReveal>
+            <div className="editorialSplit">
+              <div className="editorialSplit__copy">
+                <div className="editorialSplit__kicker">Интеграция цепочки</div>
+                <h2 className="editorialSplit__title">От хранения до отгрузки — единый стандарт контроля</h2>
+                <p className="editorialSplit__lead">
+                  Складские мощности и маршруты согласованы с требованиями клиента: прослеживаемость партий,
+                  температурный режим и документальное сопровождение на каждом этапе.
+                </p>
+              </div>
+              <figure className="editorialSplit__figure">
+                <img
+                  className="editorialSplit__img"
+                  src={siteMedia.supplyNetwork}
+                  alt={siteMediaAlt.supplyNetwork}
+                  width={1600}
+                  height={1100}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption className="editorialSplit__cap">Логистика и мониторинг поставок</figcaption>
+              </figure>
+            </div>
+          </AnimatedReveal>
         </Container>
       </section>
 
@@ -245,4 +298,3 @@ export const PartnersPage = () => {
     </div>
   )
 }
-
