@@ -1305,7 +1305,11 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: max(0.75rem, env(safe-area-inset-top, 0px))
+    max(0.75rem, env(safe-area-inset-right, 0px))
+    max(0.75rem, env(safe-area-inset-bottom, 0px))
+    max(0.75rem, env(safe-area-inset-left, 0px));
+  box-sizing: border-box;
 }
 
 .modalBackdrop {
@@ -1316,13 +1320,21 @@ select {
 
 .modalPanel {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 42rem;
+  max-height: calc(100vh - 2rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  max-height: calc(100dvh - 2rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   border-radius: var(--radius-2xl);
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: var(--surface);
   padding: 1.5rem;
   box-shadow: var(--shadow-soft);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
 }
 
 .modalHeader {
